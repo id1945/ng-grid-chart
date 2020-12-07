@@ -8,17 +8,19 @@ import { WidgetContainerComponent } from './components/grid/widget-container/wid
 
 import { GridsterModule } from 'angular-gridster2';
 import { GridService } from './components/grid/grid.service';
+import { WidgetsModule } from './widgets/widgets.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
-    WidgetContainerComponent
+    WidgetContainerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GridsterModule
+    GridsterModule,
+    WidgetsModule
   ],
   providers: [
     GridService

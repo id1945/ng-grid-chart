@@ -1,0 +1,7 @@
+<div style="height: 100vh; width: 100vw;">
+    <gridster [options]="options">
+      <gridster-item [item]="item" *ngFor="let item of dataLayout; trackBy: trackBy">
+        <app-widget-container [item]="item" [gridOptions]="options"></app-widget-container>
+      </gridster-item>
+    </gridster>
+</div>

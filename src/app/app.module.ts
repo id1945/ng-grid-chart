@@ -2,17 +2,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/_root/app.component';
+import { GridComponent } from './components/grid/grid.component';
+import { WidgetContainerComponent } from './components/grid/widget-container/widget-container.component';
+
+import { GridsterModule } from 'angular-gridster2';
+import { GridService } from './components/grid/grid.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GridComponent,
+    WidgetContainerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GridsterModule
   ],
-  providers: [],
+  providers: [
+    GridService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

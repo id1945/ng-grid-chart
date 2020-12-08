@@ -11,7 +11,7 @@ export class GridComponent implements OnInit {
 
   public options: GridsterConfig = {
     gridType: 'scrollVertical',
-    // itemChangeCallback: (item, itemComponent) => this.editorService.changeWidget(item),
+    itemChangeCallback: (item) => this.grid.changeWidget(item),
     minCols: 30,
     minRows: 20,
     maxCols: 30,
@@ -21,10 +21,10 @@ export class GridComponent implements OnInit {
     disableScrollHorizontal: true,
     disableScrollVertical: true,
     draggable: {
-      enabled: true
+      enabled: false
     },
     resizable: {
-      enabled: true
+      enabled: false
     },
     allowMultiLayer: true,
     pushItems: true,
@@ -33,7 +33,7 @@ export class GridComponent implements OnInit {
   public dataLayout: any[] = [];
 
   constructor(
-    private grid: GridService
+    public grid: GridService
   ) {
     this.grid.dataLayout.subscribe(res => {
       this.dataLayout = res;
@@ -45,6 +45,42 @@ export class GridComponent implements OnInit {
 
   public trackBy(index): void {
     return index;
+  }
+
+  public onDraggable(e): void {
+    this.options.draggable.enabled = e.target.checked;
+    if (this.options.api) {
+      this.options.api.optionsChanged();
+    }
+  }
+
+  public onResizable(e): void {
+    this.options.resizable.enabled = e.target.checked;
+    if (this.options.api) {
+      this.options.api.resize();
+      this.options.api.optionsChanged();
+    }
+  }
+
+  public onCols(e): void {
+    this.options.minCols = e.target.value;
+    this.options.maxCols = e.target.value;
+    if (this.options.api) {
+      this.options.api.optionsChanged();
+    }
+  }
+
+  public onRows(e): void {
+    this.options.minRows = e.target.value;
+    this.options.maxRows = e.target.value;
+    if (this.options.api) {
+      this.options.api.optionsChanged();
+    }
+  }
+
+  public clear(): void {
+    localStorage.clear();
+    window.location.reload();
   }
 
 }

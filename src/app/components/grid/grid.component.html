@@ -1,6 +1,18 @@
-<div style="height: 100vh; width: 100vw;">
-    <gridster [options]="options">
-      <gridster-item [item]="item" *ngFor="let item of dataLayout; trackBy: trackBy">
+<div style="width: 80vw;" class="m-auto">
+  Draggable: <input type="checkbox" [(ngModel)]="options.draggable.enabled" name="asdasd" (change)="onDraggable($event)">
+  Resizable: <input type="checkbox" [(ngModel)]="options.resizable.enabled" name='asas' (change)="onResizable($event)">
+  MinCols: <input type="number" [value]="options.minCols" (input)="onCols($event)">
+  MinRows: <input type="number" [value]="options.minRows" (input)="onRows($event)">
+  MaxCols: <input type="number" [value]="options.maxCols" (input)="onCols($event)">
+  MaxRows: <input type="number" [value]="options.maxRows" (input)="onRows($event)">
+  <button class="btn btn-warning float-right mx-1" (click)="clear()">Clear Storage</button>
+  <button class="btn btn-success float-right mx-1" (click)="grid.add()">Add Widget</button>
+</div>
+
+<div style="height: 96vh; width: 80vw;" class="m-auto">
+  <gridster [options]="options">
+    <gridster-item [item]="item" *ngFor="let item of dataLayout; trackBy: trackBy">
+        <button class="btn btn-danger float-right" (click)="grid.delete(item)">X</button>
         <app-widget-container [item]="item" [gridOptions]="options"></app-widget-container>
       </gridster-item>
     </gridster>

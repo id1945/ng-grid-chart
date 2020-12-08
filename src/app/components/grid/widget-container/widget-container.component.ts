@@ -16,12 +16,10 @@ export class WidgetContainerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.item, this.gridOptions);
     this.loadComponent(this.item.widget.type);
   }
 
   private loadComponent(componentTypeToRender): void {
-    console.log('componentTypeToRender', componentTypeToRender);
     const c = this.componentFactoryResolver.resolveComponentFactory(widgetMap[componentTypeToRender]);
     const component = this.widgetHost.createComponent(c);
     component.instance.item = this.item;

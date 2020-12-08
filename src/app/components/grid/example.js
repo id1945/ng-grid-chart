@@ -22,7 +22,7 @@ export default {
       }
     },
     {
-      id: 1,
+      id: 2,
       rows: 6,
       cols: 10,
       x: 4,
@@ -84,7 +84,7 @@ export default {
       }
     },
     {
-      id: 2,
+      id: 3,
       rows: 6,
       cols: 10,
       x: 16,
@@ -105,7 +105,7 @@ export default {
       }
     },
     {
-      id: 3,
+      id: 4,
       rows: 6,
       cols: 10,
       x: 16,

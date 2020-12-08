@@ -9,6 +9,8 @@ import { WidgetContainerComponent } from './components/grid/widget-container/wid
 import { GridsterModule } from 'angular-gridster2';
 import { GridService } from './components/grid/grid.service';
 import { WidgetsModule } from './widgets/widgets.module';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { WidgetsModule } from './widgets/widgets.module';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     GridsterModule,
     WidgetsModule

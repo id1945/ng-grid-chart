@@ -1,3 +1,4 @@
+# Angular grid-chart
 ## Clone code
 git clone https://github.com/id1945/grid-chart.git
 

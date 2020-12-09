@@ -19,7 +19,7 @@ export class GridComponent implements OnInit {
       this.dataLayout = res;
     });
     this.grid.options.subscribe(res => {
-      this.options = res;
+      this.options = {...res, itemChangeCallback: (item) => this.grid.changeWidget(item)};
     });
   }
 

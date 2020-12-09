@@ -21,7 +21,7 @@ export class GridService {
   public initConfig() {
     const options = {
       gridType: 'scrollVertical',
-      itemChangeCallback: (item) => this.changeWidget(item),
+      // itemChangeCallback: (item) => this.changeWidget(item),
       minCols: 8,
       minRows: 6,
       maxCols: 8,

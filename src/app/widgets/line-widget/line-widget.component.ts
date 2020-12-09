@@ -8,17 +8,22 @@ declare var zingchart: any;
   styleUrls: ['./line-widget.component.scss']
 })
 export class LineWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
+
   @Input() item: any;
+  public id: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    // Key is unique
+    const r = Math.random().toString(36).substring(7)
+    this.id = `line-graph-${new Date().getTime()}-${r}`;
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       zingchart.render({
-        id: 'line-graph',
+        id: this.id,
         data: this.item.widget.config,
         height: '100%',
         width: '100%'
@@ -27,7 +32,7 @@ export class LineWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    zingchart.exec('line-graph', 'destroy');
+    zingchart.exec(this.id, 'destroy');
   }
 
 }

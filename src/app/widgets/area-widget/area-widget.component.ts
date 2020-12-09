@@ -11,16 +11,20 @@ declare var zingchart: any;
 export class AreaWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() item: any;
+  public id: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    // Key is unique
+    const r = Math.random().toString(36).substring(7)
+    this.id = `area-graph-${new Date().getTime()}-${r}`;
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       zingchart.render({
-        id: 'area-graph',
+        id: this.id,
         data: this.item.widget.config,
         height: '100%',
         width: '100%'
@@ -29,7 +33,7 @@ export class AreaWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    zingchart.exec('area-graph', 'destroy');
+    zingchart.exec(this.id, 'destroy');
   }
 
 }

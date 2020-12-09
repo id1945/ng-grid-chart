@@ -8,17 +8,22 @@ declare var zingchart: any;
   styleUrls: ['./radar-widget.component.scss']
 })
 export class RadarWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
+
   @Input() item: any;
+  public id: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    // Key is unique
+    const r = Math.random().toString(36).substring(7)
+    this.id = `ragar-graph-${new Date().getTime()}-${r}`;
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       zingchart.render({
-        id: 'radar-graph',
+        id: this.id,
         data: this.item.widget.config,
         height: '100%',
         width: '100%'
@@ -27,7 +32,7 @@ export class RadarWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    zingchart.exec('radar-graph', 'destroy');
+    zingchart.exec(this.id, 'destroy');
   }
 
 }

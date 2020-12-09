@@ -10,16 +10,20 @@ declare var zingchart: any;
 export class BarWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() item: any;
+  public id: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    // Key is unique
+    const r = Math.random().toString(36).substring(7)
+    this.id = `bar-graph-${new Date().getTime()}-${r}`;
   }
-
+  
   ngAfterViewInit(): void {
     setTimeout(() => {
       zingchart.render({
-        id: 'bar-graph',
+        id: this.id,
         data: this.item.widget.config,
         height: '100%',
         width: '100%'
@@ -28,7 +32,7 @@ export class BarWidgetComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    zingchart.exec('bar-graph', 'destroy');
+    zingchart.exec(this.id, 'destroy');
   }
 
 }

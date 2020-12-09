@@ -9,27 +9,7 @@ import { GridService } from './grid.service';
 })
 export class GridComponent implements OnInit {
 
-  public options: GridsterConfig = {
-    gridType: 'scrollVertical',
-    itemChangeCallback: (item) => this.grid.changeWidget(item),
-    minCols: 30,
-    minRows: 20,
-    maxCols: 30,
-    maxRows: 20,
-    outerMargin: false,
-    margin: 10,
-    disableScrollHorizontal: true,
-    disableScrollVertical: true,
-    draggable: {
-      enabled: false
-    },
-    resizable: {
-      enabled: false
-    },
-    allowMultiLayer: true,
-    pushItems: true,
-  };
-
+  public options: GridsterConfig;
   public dataLayout: any[] = [];
 
   constructor(
@@ -37,6 +17,9 @@ export class GridComponent implements OnInit {
   ) {
     this.grid.dataLayout.subscribe(res => {
       this.dataLayout = res;
+    });
+    this.grid.options.subscribe(res => {
+      this.options = res;
     });
   }
 
@@ -51,6 +34,7 @@ export class GridComponent implements OnInit {
     this.options.draggable.enabled = e.target.checked;
     if (this.options.api) {
       this.options.api.optionsChanged();
+      this.grid.changeConfig(this.options);
     }
   }
 
@@ -59,6 +43,7 @@ export class GridComponent implements OnInit {
     if (this.options.api) {
       this.options.api.resize();
       this.options.api.optionsChanged();
+      this.grid.changeConfig(this.options);
     }
   }
 
@@ -67,6 +52,7 @@ export class GridComponent implements OnInit {
     this.options.maxCols = e.target.value;
     if (this.options.api) {
       this.options.api.optionsChanged();
+      this.grid.changeConfig(this.options);
     }
   }
 
@@ -75,12 +61,21 @@ export class GridComponent implements OnInit {
     this.options.maxRows = e.target.value;
     if (this.options.api) {
       this.options.api.optionsChanged();
+      this.grid.changeConfig(this.options);
     }
   }
 
   public clear(): void {
-    localStorage.clear();
-    window.location.reload();
+    const r = confirm('Do you want to revert to original version?');
+    if (r == true) {
+      localStorage.clear();
+      window.location.reload();
+    }
+  }
+
+  public save(): void {
+    alert('Please see console or at output!');
+    console.log('Save:',this.grid.dataLayout.value);
   }
 
 }

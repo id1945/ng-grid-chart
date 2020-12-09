@@ -1,10 +1,10 @@
 export default {
   widgets: [{
       id: 1,
-      rows: 6,
-      cols: 10,
-      x: 4,
-      y: 1,
+      rows: 2,
+      cols: 4,
+      x: 0,
+      y: 0,
       widget: {
         type: 'BarWidget',
         name: 'Hello Bar',
@@ -23,10 +23,10 @@ export default {
     },
     {
       id: 2,
-      rows: 6,
-      cols: 10,
+      rows: 2,
+      cols: 4,
       x: 4,
-      y: 8,
+      y: 0,
       widget: {
         type: 'RadarWidget',
         name: 'Hello Radar',
@@ -85,10 +85,10 @@ export default {
     },
     {
       id: 3,
-      rows: 6,
-      cols: 10,
-      x: 16,
-      y: 1,
+      rows: 2,
+      cols: 4,
+      x: 0,
+      y: 2,
       widget: {
         type: 'LineWidget',
         name: 'Hello Line',
@@ -106,10 +106,10 @@ export default {
     },
     {
       id: 4,
-      rows: 6,
-      cols: 10,
-      x: 16,
-      y: 8,
+      rows: 2,
+      cols: 4,
+      x: 4,
+      y: 2,
       widget: {
         type: 'AreaWidget',
         name: 'Hello Area',
@@ -124,7 +124,6 @@ export default {
             {
               values: [30, 5, 18, 21, 33, 41, 29, 15]
             }
-
           ]
         }
       }

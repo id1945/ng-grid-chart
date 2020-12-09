@@ -1,19 +1,45 @@
-<div style="width: 80vw;" class="m-auto">
-  Draggable: <input type="checkbox" [(ngModel)]="options.draggable.enabled" name="asdasd" (change)="onDraggable($event)">
-  Resizable: <input type="checkbox" [(ngModel)]="options.resizable.enabled" name='asas' (change)="onResizable($event)">
-  MinCols: <input type="number" [value]="options.minCols" (input)="onCols($event)">
-  MinRows: <input type="number" [value]="options.minRows" (input)="onRows($event)">
-  MaxCols: <input type="number" [value]="options.maxCols" (input)="onCols($event)">
-  MaxRows: <input type="number" [value]="options.maxRows" (input)="onRows($event)">
-  <button class="btn btn-warning float-right mx-1" (click)="clear()">Clear Storage</button>
-  <button class="btn btn-success float-right mx-1" (click)="grid.add()">Add Widget</button>
-</div>
-
-<div style="height: 96vh; width: 80vw;" class="m-auto">
-  <gridster [options]="options">
-    <gridster-item [item]="item" *ngFor="let item of dataLayout; trackBy: trackBy">
-        <button class="btn btn-danger float-right" (click)="grid.delete(item)">X</button>
+<div style="width: 70vw; background: grey;" class="float-left p-3">
+  <h3 style="height: 5vh;" class="text-center">Angular-gridster2</h3>
+  <div style="height: 89vh;">
+    <gridster [options]="options">
+      <gridster-item [item]="item" *ngFor="let item of dataLayout;">
+        <button class="float-right bg-danger" (click)="grid.delete(item)">X</button>
         <app-widget-container [item]="item" [gridOptions]="options"></app-widget-container>
       </gridster-item>
     </gridster>
+  </div>
+  <div style="height: 2vh; text-shadow: 0px 0px 5px red; text-align: center;">
+      <span style="color: white;"><b>Information:</b>
+        <marquee direction="left" scrollamount="10" width="50%" style="vertical-align: middle;">Last released on 09/12/2020 - Includes support libraries Angular v10.0.0 - Angular-gridster2 v11.0.0 - Lodash v4.17.20 - Zingchart v2.9.2 - Bootstrap v4.5.3<span></span></marquee>
+      </span>
+  </div>
+</div>
+
+<div style="height: 100vh; width: 29vw;" class="float-left p-5">
+  <h3 class="text-center">Hosted by localstorage</h3>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultCheck1" [(ngModel)]="options.draggable.enabled" (change)="onDraggable($event)">
+    <label class="custom-control-label" for="defaultCheck1">Draggable</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultCheck2" [(ngModel)]="options.resizable.enabled" (change)="onResizable($event)">
+    <label class="custom-control-label" for="defaultCheck2">Resizable</label>
+  </div>
+  <div class="form-group">
+    <label>Cols</label>
+    <input type="number" class="form-control" placeholder="Enter cols" [value]="options.minCols" (input)="onCols($event)">
+  </div>
+  <div class="form-group">
+    <label>Rows</label>
+    <input type="number" class="form-control" placeholder="Enter rows" [value]="options.minRows" (input)="onRows($event)">
+  </div>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-warning mx-1" (click)="clear()">Clear Storage</button>
+    <button class="btn btn-primary mx-1" (click)="grid.add()">Add Widget Radom</button>
+    <button class="btn btn-success mx-1" (click)="save()">Save</button>
+  </div>
+  <div>
+    <label>Output:</label>
+    <pre style="height: 60vh; background-color: bisque;">{{grid.dataLayout.value | json}}</pre>
+  </div>
 </div>

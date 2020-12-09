@@ -39,32 +39,36 @@ export class GridService {
       allowMultiLayer: true,
       pushItems: true,
     };
-    const data = JSON.parse(localStorage.getItem('options'));
-    if (!data) {
-      this.options.next(options);
-    } else {
+    const data = JSON.parse(localStorage.getItem('options')); // CALL API: get config
+    if (data) {
+      // Success
       this.options.next(data);
+    } else {
+      // Failed: Thì lấy dữ liệu default
+      this.options.next(options);
+      localStorage.setItem('options', JSON.stringify(options));
     }
   }
 
   public getWidgets(): void {
-    // DUMY CALL API
-    const data = localStorage.getItem('data');
+    const data = localStorage.getItem('data'); // CALL API: get data layout
     if (data) {
+      // Success
       this.dataLayout.next(JSON.parse(data));
     } else {
+      // Fail: Thì lấy dữ liệu default
       this.dataLayout.next(Exampledata.widgets);
       localStorage.setItem('data', JSON.stringify(Exampledata.widgets));
     }
   }
 
   public changeConfig(options): void {
+    localStorage.setItem('options', JSON.stringify(options)); // CALL API: Update config
     this.options.next(options);
-    localStorage.setItem('options', JSON.stringify(options));
   }
 
   public changeWidget(widget): void {
-    const dataStorage = JSON.parse(localStorage.getItem('data'));
+    const dataStorage = JSON.parse(localStorage.getItem('data')); // CALL API: Update data layout
     if (dataStorage) {
       const data = dataStorage.map(f => {
         return (f.id === widget.id) ? widget : f;
@@ -75,7 +79,7 @@ export class GridService {
   }
 
   public delete(widget): void {
-    const dataStorage = JSON.parse(localStorage.getItem('data'));
+    const dataStorage = JSON.parse(localStorage.getItem('data')); // CALL API: Xóa 1 item data layout
     if (dataStorage) {
       const data = dataStorage.filter(f => f.id !== widget.id);
       this.dataLayout.next(data);
@@ -84,7 +88,7 @@ export class GridService {
   }
 
   public add(): void {
-    const dataStorage = JSON.parse(localStorage.getItem('data'));
+    const dataStorage = JSON.parse(localStorage.getItem('data')); // CALL API: Insert 1 item data layout
     if (dataStorage.length < this.options.value.minRows) {
       const r = Math.floor(Math.random() * 4); // Radom 0->3
       const data = { ...Exampledata.widgets[r] }; // Get base id = radom
